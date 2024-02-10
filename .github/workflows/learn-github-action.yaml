@@ -1,0 +1,34 @@
+name:  learn-github-action
+on:
+  push:
+    branch:
+      -main
+  pull-request:
+    branches:
+      -main
+
+jobs:
+  push-job:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      -name: Checkout repository
+       uses: actions/checkout@v2
+       with:
+        fecth-depth: 2
+      -name: Display git diff
+       run : |
+        echo "showing git diff"
+        git diff HEAD^ HEAD
+
+  pull-request-job:
+    if: github.event_name == 'pull-request'
+    runs-on: ubuntu-latest
+    steps:
+      -name: Checkout repository
+       uses: actions/checkout@v2
+       with:
+        fecth-depth: 2
+      -name: Display git diff
+       run : git rev-parse HEAD
+       
