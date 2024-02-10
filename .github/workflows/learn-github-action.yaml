@@ -1,34 +1,36 @@
 name:  learn-github-action
 on:
   push:
-    branch:
-      -main
-  pull-request:
     branches:
-      -main
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  push-job:
+  push_job:
+    runs-on: ubuntu-latest
     if: github.event_name == 'push'
-    runs-on: ubuntu-latest
     steps:
-      -name: Checkout repository
-       uses: actions/checkout@v2
-       with:
-        fecth-depth: 2
-      -name: Display git diff
-       run : |
-        echo "showing git diff"
-        git diff HEAD^ HEAD
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - name: Display git diff
+        run: |
+          echo "showing git diff"
+          git diff HEAD^ HEAD
 
-  pull-request-job:
-    if: github.event_name == 'pull-request'
+  pull_request_job:
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
     steps:
-      -name: Checkout repository
-       uses: actions/checkout@v2
-       with:
-        fecth-depth: 2
-      -name: Display git diff
-       run : git rev-parse HEAD
-       
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - name: Display latest commit ID
+        run: |
+          echo "The latest commit ID is:"
+          git rev-parse HEAD
+
