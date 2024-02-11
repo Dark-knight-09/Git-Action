@@ -35,7 +35,7 @@ A workflow is a file that defines a collection of jobs and the rules that execut
 // This is the name of your workflow, it can be anything you like -->
 name: 
 
-// This specifies when the workflow should be run -->
+// This specifies when the workflow(EVENT) should be run -->
 on: 
     // The workflow will run when there's a push to the main branch
     push:
