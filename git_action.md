@@ -32,36 +32,36 @@ A runner is a server that runs a job. You can use a GitHub-hosted runner, or you
 # Workflow
 A workflow is a file that defines a collection of jobs and the rules that execute those jobs. 
 
-// This is the name of your workflow, it can be anything you like -->
+#This is the name of your workflow, it can be anything you like -->
 name: 
 
-// This specifies when the workflow(EVENT) should be run -->
+#This specifies when the workflow(EVENT) should be run -->
 on: 
-    // The workflow will run when there's a push to the main branch
+    #The workflow will run when there's a push to the main branch
     push:
         branches:
         - main
-    // The workflow will also run when a pull request is made to the main branch
+    #The workflow will also run when a pull request is made to the main branch
     pull_request:
         branches:
         - main
 
-// Jobs are a set of steps that execute on the same runner
+#Jobs are a set of steps that execute on the same runner
 jobs:
-    // You can name the job anything you like
+    #You can name the job anything you like
     build:
-        // This specifies the type of runner that the job will run on
+        #This specifies the type of runner that the job will run on
         runs-on: ubuntu-latest
-        // Steps are a sequence of tasks that will be executed as part of the job
+        #Steps are a sequence of tasks that will be executed as part of the job
         steps:
-            // This is a placeholder for an action, replace it with the action you want to use
+            #This is a placeholder for an action, replace it with the action you want to use
             - uses: xxxxxxxxxxxxxxxx@xx
-            // This step sets up Python 3.8 using the setup-python action
+            #This step sets up Python 3.8 using the setup-python action
             - name: Set up Python 3.8
                 uses: actions/setup-python@v2
                 with:
                     python-version: 3.8
-            // This step checks out your repository's code onto the runner using the checkout action
+            #This step checks out your repository's code onto the runner using the checkout action
             - name: Checkout code
                 uses: actions/checkout@v2
 
