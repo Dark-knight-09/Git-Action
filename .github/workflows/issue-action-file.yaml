@@ -10,22 +10,20 @@ jobs:
       - name: issue event
         run: |
             echo "issue event"
-            echo "${{ToJson(github.event.issue) }}"
+            echo "${{ toJson(github.event.issue) }}"
         shell: bash
       
-    reply_job:
+  reply_job:
       runs-on: ubuntu-latest
       steps:  
         - name: issue reply
           uses: peter-evans/create-or-update-comment@v4
           with:
-            issue-number:  ${{github.event.issue.number}}
+            issue-number:  ${{ github.event.issue.number }}
             body: |
-              echo "${{github.event.issue.user.login}} thanks for creating a issue no# ${{github.event.issue.title}}
+              ${{ github.event.issue.user.login }} thanks for creating an issue no# ${{ github.event.issue.title }}
               - With GitHub **Markdown** :sparkles:
               - Created by [create-or-update-comment][1]
 
               [1]: https://github.com/peter-evans/create-or-update-comment
             reactions: '+1'
-
-    
