@@ -16,12 +16,12 @@ jobs:
         shell: bash
   reply_job:
       runs-on: ubuntu-latest
+      permissions:
+            contents: write
+            issues: write
       steps:  
         - name: issue reply
           uses: peter-evans/create-or-update-comment@v4
-          permissions:
-            contents: write
-            issues: write
           with:
             token: ${{ secrets.GITHUB_TOKEN }}
             issue-number:  ${{ github.event.issue.number }}
