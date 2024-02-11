@@ -12,7 +12,7 @@ jobs:
         shell: bash
 
       - name: display issue information
-        run: ${{ toJson(github.event.issue)}} | jq 
+        run: ${{ toJson(github.event.issue)}}
         shell: bash
   reply_job:
       runs-on: ubuntu-latest
