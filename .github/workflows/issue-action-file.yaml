@@ -12,8 +12,11 @@ jobs:
         shell: bash
 
       - name: display issue information
-        run: ${{ toJson(github.event.issue)}}
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
         shell: bash
+
   reply_job:
       runs-on: ubuntu-latest
       permissions:
