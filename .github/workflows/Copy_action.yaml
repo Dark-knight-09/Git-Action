@@ -1,2 +1,25 @@
 name: copied actions from github market place
-
+on:
+  push:
+    branches: 
+        - main
+    paths:
+        - /.github/workflows/copy_action.yaml
+jobs:
+  job_1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Push_commit_display
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - name: display_diff
+        run: git diff HEAD~1 HEAD
+        
+      - name: display the name of the git user
+        run: echo "${{github.event.user.login}}"
+        shell: bash
+        
+          
+      
+          
