@@ -15,5 +15,10 @@
 
 7. **A/B Testing**: This strategy involves deploying multiple versions of the software to different groups of users or servers, and then comparing the performance and user feedback to determine which version is more effective. It is often used to test new features or changes before a full deployment.
 
-These are just a few examples of deployment strategies commonly used in software development. The choice of strategy depends on various factors such as the nature of the application, the scale of deployment, and the desired level of risk management.
+usually a combination of these strategies is used to achieve the desired deployment goals. 
+For example, 
+1. a blue-green deployment may be used for major version updates, 
+2. canary deployments may be used for smaller incremental changes.
+3. rollback and A/B testing strategies can be employed as needed to ensure a smooth and successful deployment process.
+
 
