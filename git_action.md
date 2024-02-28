@@ -9,13 +9,21 @@ workflows are defined in a YAML file needs to saved on repository's .github/work
 An event is a specific activity in a repository that triggers a workflow run. 
 list of events are:
 - push : Triggers the workflow on push events to the repository.
+    - branches : The branches on which you want to run the workflow. 
+    
 - pull_request : Triggers the workflow on pull request events. This includes opening, closing, and synchronizing pull requests.
+    - branches : The branches on which you want to run the workflow. 
+    - types : The types of pull requests on which you want to run the workflow. 
+
 - schedule : Triggers the workflow on a schedule.
+     - cron : The cron syntax for the schedule. For example, `0 0 * * 0` runs the workflow every Sunday at 00:00.
 - label : Triggers the workflow when a label is added to the repository.
 - issue_comment : Triggers the workflow when an issue comment is created, edited, or deleted.
+     - types : The types of issue comments on which you want to run the workflow. 
 - create : Triggers the workflow when a branch or tag is created.
 - delete : Triggers the workflow when a branch or tag is deleted.
 - deployment : Triggers the workflow when a deployment is created.
+- issue : Triggers the workflow when an issue is opened, edited, deleted, transferred, pinned, unpinned, closed, reopened, assigned, unassigned, labeled, unlabeled, locked, or unlocked.
 
 # Jobs
 A job is a set of steps that execute on the same runner. By default, a workflow with multiple jobs will run those jobs in parallel. You can configure a job to run sequentially after another job.
