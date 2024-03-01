@@ -58,6 +58,35 @@ to run shell command:
 - run: command to run
 - env: the environment variables that are available to the action.
 
+
+Note: github generates token for each action, which can be used to access the repository using secrets.github_token. to controle the access of token on repository, you can use the permission key to control the token permissions.
+
+job_1:
+    runs-on:ubunut-latest
+    permissions:
+        contents: read
+        pull_requests: write
+        issue: write
+    steps:
+        - name: step_1
+          uses: actions/checkout@v2
+          with:
+                fecch-depth: 2
+        - name: step_2
+          uses: actions/github-script@v3
+          with:
+            github-token: ${{secrets.GITHUB_TOKEN}}
+            script: |
+                const issueComment = `Thank you for creating a new issue! We will get back to you shortly.`;
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: issueComment
+            });
+
+
+
 # Workflow
 A workflow is a file that defines a collection of jobs and the rules that execute those jobs. 
 
