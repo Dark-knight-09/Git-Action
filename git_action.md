@@ -10,6 +10,8 @@ An event is a specific activity in a repository that triggers a workflow run.
 list of events are:
 - push : Triggers the workflow on push events to the repository.
     - branches : The branches on which you want to run the workflow. 
+    - paths : The paths on which you want to run the workflow.
+    - tags : The tags on which you want to run the workflow.
 
 - pull_request : Triggers the workflow on pull request events. This includes opening, closing, and synchronizing pull requests.
     - branches : The branches on which you want to run the workflow. 
@@ -35,6 +37,7 @@ Job:
 - runs-on: The type of operating system that the job will run on. 
 - needs: The jobs that must complete successfully before this job will run. (depend-on)
 - if: The expression that determines whether to run the job or not.
+- outputs: The output variables of the job. You can use outputs to pass data from one job to another in the same workflow.
 
 
 # Steps
@@ -61,30 +64,39 @@ to run shell command:
 
 Note: github generates token for each action, which can be used to access the repository using secrets.github_token. to controle the access of token on repository, you can use the permission key to control the token permissions.
 
-job_1:
-    runs-on:ubunut-latest
-    permissions:
-        contents: read
-        pull_requests: write
-        issue: write
-    steps:
-        - name: step_1
-          uses: actions/checkout@v2
-          with:
-                fecch-depth: 2
-        - name: step_2
-          uses: actions/github-script@v3
-          with:
-            github-token: ${{secrets.GITHUB_TOKEN}}
-            script: |
-                const issueComment = `Thank you for creating a new issue! We will get back to you shortly.`;
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: issueComment
-            });
-
+job: 
+    job_1:
+        runs-on:ubunut-latest
+        permissions:
+            contents: read
+            pull_requests: write
+            issue: write
+        steps:
+            - name: step_1
+              uses: actions/checkout@v2
+              with:
+                    fecch-depth: 2
+            - name: step_2
+              uses: actions/github-script@v3
+              with:
+                github-token: ${{secrets.GITHUB_TOKEN}}
+                script: |
+                    const issueComment = `Thank you for creating a new issue! We will get back to you shortly.`;
+                    github.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: issueComment
+                });
+            - name: step_3
+              output:
+                time: ${{steps.step_2.outputs.time}}
+    job_2:
+        runs-on: ubuntu-latest
+        needs: job_1
+        steps:
+            - name: step_1
+              run: echo "The time was ${{needs.job_1.outputs.time}}."
 
 
 # Workflow
