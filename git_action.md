@@ -27,6 +27,11 @@ list of events are:
 - delete : Triggers the workflow when a branch or tag is deleted.
 - deployment : Triggers the workflow when a deployment is created.
 
+- workflow_dispatch : Triggers the workflow on the manual event. You can use the workflow_dispatch event to trigger a workflow run on GitHub, without having to push a change to the repository.
+    - inputs: The input parameters for the workflow. You can use inputs to pass data to the workflow from the workflow_dispatch event.
+    - types: The types of workflow runs on which you want to run the workflow.
+
+    
 - issue : Triggers the workflow when an issue 
     - types:  The types of issues on which you want to run the workflow.
 
